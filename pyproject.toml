@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "hackathon-duckdb"
+version = "0.1.0"
+description = "hackathon to look at analytical databases"
+authors = ["Luuk van der Velden"]
+readme = "README.md"
+packages = [{include = "hackathon_duckdb"}]
+
+[tool.poetry.dependencies]
+python = "~3.11"
+duckdb = "^0.9.0"
+pandas = "^2.1.1"
+polars = "^0.19.7"
+pyarrow = "^12.0.0"
+deltalake = "^0.12.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+pytest = "^7.4.2"
+flake8 = "^6.1.0"
+pycodestyle = "^2.11.0"
+pydocstyle = "^6.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
