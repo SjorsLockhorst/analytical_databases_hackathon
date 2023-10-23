@@ -1,8 +1,9 @@
 {
     "name": "python3.11",
-    "image": "python:3.11-bullseye",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "python",
     // This line allows you to use Docker runconfigs if you set "sharedVolumes": false
-    "mounts": [],
+    "workspaceFolder": "/workspace",
     // Set *default* container specific settings.json values on container create.
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash",
@@ -17,12 +18,14 @@
     "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "GitHub.copilot-labs",
+        "ms-azuretools.vscode-docker"
     ],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [],
+    "forwardPorts": []
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "cd .devcontainer && cat setup.sh | tr -d '\r' > setup-lf.sh && mv setup-lf.sh setup.sh && chmod +x setup.sh && sh setup.sh"
+    // "postCreateCommand": "cd .devcontainer && cat setup.sh | tr -d '\r' > setup-lf.sh && mv setup-lf.sh setup.sh && chmod +x setup.sh && sh setup.sh"
     // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
     // "remoteUser": "vscode"
 }

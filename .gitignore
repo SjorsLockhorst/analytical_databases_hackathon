@@ -1,0 +1,4 @@
+.devcontainer/db-data
+.devcontainer/pgadmin-data
+.devcontainer/.env
+data/delta_df
