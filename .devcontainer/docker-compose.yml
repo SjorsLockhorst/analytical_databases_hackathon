@@ -17,7 +17,7 @@ services:
     # Runs app on the same network as the service container, allows "forwardPorts" in devcontainer.json function.
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
     # (Adding the "ports" property to this file will not forward from a Codespace.)
-
+    network_mode: service:database
     # Uncomment the next line to use a non-root user for all processes - See https://aka.ms/vscode-remote/containers/non-root for details.
     # user: vscode
 
@@ -28,8 +28,6 @@ services:
       - 15432:5432
     env_file:
       - .env
-    networks:
-      - postgres-network
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -42,11 +40,9 @@ services:
       - .env
     depends_on:
       - database
-    networks:
-      - postgres-network
     volumes:
       - ./pgadmin-data/:/var/lib/pgadmin/
 
 networks:
-  postgres-network:
-    driver: bridge
+  default:
+    name: postgres-network

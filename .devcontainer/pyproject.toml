@@ -24,6 +24,7 @@ datasets = "^2.14.6"
 pillow = "^10.1.0"
 torch = {version = "^2.1.0", source = "torch_cpu"}
 torchvision = {version = "^0.16.0", source = "torch_cpu"}
+psycopg = "^3.1.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"

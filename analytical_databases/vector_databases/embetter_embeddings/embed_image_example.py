@@ -17,8 +17,11 @@ from embetter.vision import ImageLoader, TimmEncoder
 # then it grabs the image paths and turns them into `PIL.Image` objects
 # which then get fed into MobileNetv2 via TorchImageModels (timm).
 image_emb_pipeline = make_pipeline(
-    ColumnGrabber("img_path"), ImageLoader(convert="RGB"), TimmEncoder("mobilenetv2_120d")
+    ColumnGrabber("img_path"),
+    ImageLoader(convert="RGB"),
+    TimmEncoder("mobilenetv2_120d"),
 )
 
 dataf = pd.DataFrame({"img_path": ["/workspace/data/images/cats_vs_dogs/cat/0.jpg"]})
-image_emb_pipeline.fit_transform(dataf)
+X = image_emb_pipeline.fit_transform(dataf)
+print(X.shape)
