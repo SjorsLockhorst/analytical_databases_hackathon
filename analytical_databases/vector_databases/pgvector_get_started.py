@@ -16,3 +16,10 @@ source:
 * https://github.com/pgvector/pgvector-python
 
 """
+"""
+`pgvector` is a PostgreSQL extension for efficient vector storage and computation. 
+It is designed to work with high-dimensional vectors, such as those used in machine learning and data analysis. 
+It provides functions for vector operations, such as similarity search, nearest neighbor search, and dot product calculation. 
+It's particularly useful when working with large datasets where these operations would otherwise be computationally expensive.
+"""
+

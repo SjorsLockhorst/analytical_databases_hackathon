@@ -6,7 +6,7 @@ The data is stored in a Pandas DataFrame based on a csv file in the "../data" di
 import duckdb
 import pandas as pd
 
-iris_pdf = pd.read_csv("./data/iris_dataset.csv")
+iris_pdf = pd.read_csv("/workspace/data/iris_dataset.csv")
 
 # Create a DuckDB database in-memory
 con = duckdb.connect(database=":memory:", read_only=False)

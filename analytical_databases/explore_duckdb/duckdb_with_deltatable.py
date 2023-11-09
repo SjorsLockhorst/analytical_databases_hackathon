@@ -11,7 +11,7 @@ from deltalake import DeltaTable, write_deltalake
 # write_deltalake("./data/delta_df", df)
 
 
-dt = DeltaTable("./data/delta_df")
+dt = DeltaTable("/workspace/data/delta_df")
 dataset = dt.to_pyarrow_dataset()
 ex_data = duckdb.arrow(dataset)
 
