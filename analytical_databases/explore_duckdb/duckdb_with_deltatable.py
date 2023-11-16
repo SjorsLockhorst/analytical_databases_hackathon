@@ -7,8 +7,8 @@ import pandas as pd
 
 from deltalake import DeltaTable, write_deltalake
 
-# df = pd.DataFrame({"x": [1, 2, 3]})
-# write_deltalake("./data/delta_df", df)
+df = pd.DataFrame({"x": [1, 2, 3]})
+write_deltalake("./data/delta_df", df)
 
 
 dt = DeltaTable("/workspace/data/delta_df")
