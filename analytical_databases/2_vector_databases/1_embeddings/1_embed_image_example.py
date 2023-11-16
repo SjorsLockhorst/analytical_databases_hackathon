@@ -8,7 +8,6 @@ https://github.com/koaning/embetter
 """
 import pandas as pd
 from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import LogisticRegression
 
 from embetter.grab import ColumnGrabber
 from embetter.vision import ImageLoader, TimmEncoder
@@ -25,3 +24,16 @@ image_emb_pipeline = make_pipeline(
 dataf = pd.DataFrame({"img_path": ["/workspace/data/images/cats_vs_dogs/cat/0.jpg"]})
 X = image_emb_pipeline.fit_transform(dataf)
 print(X.shape)
+
+
+"""
+Challenge:
+Generate two numpy arrays with embeddings for the cats and dogs images respectively.
+
+Then calculate the average cosine similarity within and between the cats and dogs embeddings.
+
+Are cats more similar to cats than dogs are to dogs? and how similar are cats to dogs?
+
+- https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html
+
+"""
