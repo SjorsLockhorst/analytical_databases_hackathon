@@ -18,7 +18,11 @@ print(X.shape)
 
 """
 Challenge:
+Load the /data/EWD_trip_report.txt into memory and split it into sentences. Generate embeddings for all sentences.
+Select a sentence from the text and find the most similar sentences to it.
 
-Download 
+Try to find out what Edgar Wiebe Dijkstra said about the mistakes attributable to John von Neumann.
+
+- https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html
 
 """

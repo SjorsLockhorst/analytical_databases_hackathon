@@ -1,7 +1,7 @@
 """
-Langchain is a popular library in natural language processing (NLP) to do prompt engineering.
+Langchain is a popular library in natural language processing (NLP) wrapped around a Large Language Model (LLM).
 
-Langchain can work with pgvector to store and query embeddings to add context.
+Langchain can work with pgvector to store and query embeddings to add context during prompt engineering.
 
 
 - https://python.langchain.com/docs/integrations/vectorstores/pgvector
@@ -48,27 +48,37 @@ db = PGVector.from_documents(
     collection_name=COLLECTION_NAME,
     connection_string=CONNECTION_STRING,
 )
-# How to add documents after initialization
-# db.add_documents([Document(page_content="foo")])
 
-query = "What did edgar say about take off from schiphol?"
-docs_with_score = db.similarity_search_with_score(query)
 
-for doc, score in docs_with_score:
-    print("-" * 80)
-    print("Score: ", score)
-    print(doc.page_content)
-    print("-" * 80)
+# Using a VectorStore as a Retriever
+retriever = db.as_retriever()
 
-# Maximal marginal relevance optimizes for similarity to query AND diversity among selected documents.
-docs_with_score = db.max_marginal_relevance_search_with_score(query)
-for doc, score in docs_with_score:
-    print("-" * 80)
-    print("Score: ", score)
-    print(doc.page_content)
-    print("-" * 80)
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
+from langchain.schema.runnable import RunnablePassthrough
 
+template = """Answer the question based only on the following context:
+
+{context}
+
+Question: {question}
 """
-Challenge 
+prompt = ChatPromptTemplate.from_template(template)
+model = ChatOpenAI(model_name="gpt-3.5-turbo")
 
-"""
+
+def format_docs(docs):
+    return "\n\n".join([d.page_content for d in docs])
+
+
+chain = (
+    {"context": retriever | format_docs, "question": RunnablePassthrough()}
+    | prompt
+    | model
+    | StrOutputParser()
+)
+
+answer = chain.invoke("What did edgar say about take off from schiphol?")
+
+print(answer)
