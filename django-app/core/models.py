@@ -4,9 +4,9 @@ from pgvector.django import VectorField
 
 
 class Embeddings(models.Model):
-    id = models.IntegerField(blank=True, null=True)
+    id = models.IntegerField(blank=True, primary_key=True)
     # TODO: Determine the correct amount of dimensions
-    embedding = models.VectorField(dimensions=3)
+    embedding = VectorField(dimensions=3)
 
     class Meta:
         managed = False
