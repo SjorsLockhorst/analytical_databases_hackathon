@@ -8,5 +8,7 @@ The goal is to find your perfect pet among the pictures of dogs and cats. We nee
 The pictures of all the pets are found in /data/images/cat and /data/images/dog. Pick a favorite pet from /data/images/requested_pets. The pictures are from https://huggingface.co/datasets/cats_vs_dogs. Full image set can be downloaded here: https://www.microsoft.com/en-us/download/details.aspx?id=54765 
 
 ## Django
-A Django app skeleton is provided it is your goal to write database models using PGVector and create a view that allows users to search for pets.
-PGVector has django integration https://pypi.org/project/pgvector/#django use it to create models that include vector embeddings along standard database fields such pet type (cat or dog) and Pet name. Then create a view that allows users to search for pets by uploading a picture of a pet. The view should return the top 10 most similar pets.
+A Django app skeleton is provided in `/workspace/django-app`. It is your goal to write database models using PGVector (see provided example) and create a view that allows users to search for pets.
+Users should be able to upload a picture of their preferred pet (https://djangocentral.com/uploading-images-with-django/). The view should return the top 10 most similar pets.
+
+PGVector has django integration https://pypi.org/project/pgvector/#django use it to create models that include vector embeddings along standard database fields (see example model) such pet type (cat or dog) and Pet name.
