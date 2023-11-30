@@ -12,3 +12,14 @@ A Django app skeleton is provided in `/workspace/django-app`. It is your goal to
 Users should be able to upload a picture of their preferred pet (https://djangocentral.com/uploading-images-with-django/). The view should return the top 10 most similar pets.
 
 PGVector has django integration https://pypi.org/project/pgvector/#django use it to create models that include vector embeddings along standard database fields (see example model) such pet type (cat or dog) and Pet name.
+
+## Getting started
+
+1. work on `workspace/django-app/core/models.py` to create a model for a pet in the asylum. The model should include a vector embedding of the pet picture.
+2. add a model for a user image pet request. The model should include a vector embedding of the user image.
+3. find the `manage.py` file in `workspace/django-app/django-start` folder and run the following commands:
+3. create your database migrations `python manage.py makemigrations`
+4. apply your database migrations `python manage.py migrate`
+5. run the django server `python manage.py runserver`
+5. create a view that allows users to upload a picture of their preferred pet and returns the top 10 most similar pets.
+6. test your view by uploading a picture of your favorite pet and see if you get the correct results.
