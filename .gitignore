@@ -2,3 +2,4 @@
 .devcontainer/pgadmin-data
 .devcontainer/.env
 data/delta_df
+__pycache__
