@@ -1,11 +1,13 @@
 """
+BONUS: If you are unfamiliar with PySpark, you can consider skipping this section.
+
 A feature under development for DuckDB is an API compatible with Apache Spark.
 This will allow you to use the same code for both DuckDB and Apache Spark.
 
-Many Spark workloads do not require the full power of a cluster or do not utilize the full power of a cluster.
+Many Spark workloads do not require the full power of a distributed cluster or do not utilize the full power of a cluster.
 It can be much more cost effective to run your workloads on a single machine using all cores and memory available.
 
-DuckSpark allows us to reuse our Spark code on a single machine with DuckDB.
+DuckSpark allows us to reuse our Spark code on a single machine with DuckDB and safe cost while retaining performance.
 """
 
 import duckdb

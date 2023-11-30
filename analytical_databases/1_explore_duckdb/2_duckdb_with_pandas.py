@@ -8,21 +8,18 @@ import pandas as pd
 
 iris_2_pdf = pd.read_csv("/workspace/data/iris_dataset_part_2.csv")
 
+
 """
-Challenge:
+Challenge 1:
+
 Rename the columns of the pandas dataframe to the following:
     - sepal_length
     - petal_length
     - petal_width
     - species
+
+Query the Pandas dataframe with DuckDB and print the results and schema.
+
+ref:
+- https://duckdb.org/2021/05/14/sql-on-pandas.html
 """
-
-# Create a DuckDB database in-memory
-con = duckdb.connect(database=":memory:", read_only=False)
-
-# Load the data from a csv file into a Pandas DataFrame
-result = duckdb.query("SELECT * FROM iris_2_pdf")
-
-
-# Print the result
-print(result.fetchall())

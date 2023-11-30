@@ -71,4 +71,7 @@ create a prompt template that combines context from the retriever with a questio
 Initialize a ChatOpenAI model and use the prompt template to ask a question.
 Create a lang chain (sequence) that combines the retriever, prompt template and model.
 Invoke the chain with a question about EDW's trip.
+
+ref:
+- https://python.langchain.com/docs/expression_language/cookbook/retrieval
 """
