@@ -31,11 +31,12 @@ documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 
-# Specify the path to the pre-trained model
+# Specify the path to the pre-trained embedding model
 modelPath = "BAAI/bge-large-en-v1.5"
 # Create a dictionary with model configuration options, specifying to use the CPU for computations
 model_kwargs = {"device": "cpu"}
 # Initialize an instance of HuggingFaceEmbeddings with the specified parameters
+# This can be any open-source huggingface embedding model
 embeddings = HuggingFaceEmbeddings(
     model_name=modelPath,  # Provide the pre-trained model's path
     model_kwargs=model_kwargs,  # Pass the model configuration options
@@ -51,24 +52,14 @@ db = PGVector.from_documents(
 # How to add documents after initialization
 # db.add_documents([Document(page_content="foo")])
 
-query = "What did edgar say about take off from schiphol?"
-docs_with_score = db.similarity_search_with_score(query)
-
-for doc, score in docs_with_score:
-    print("-" * 80)
-    print("Score: ", score)
-    print(doc.page_content)
-    print("-" * 80)
-
-# Maximal marginal relevance optimizes for similarity to query AND diversity among selected documents.
-docs_with_score = db.max_marginal_relevance_search_with_score(query)
-for doc, score in docs_with_score:
-    print("-" * 80)
-    print("Score: ", score)
-    print(doc.page_content)
-    print("-" * 80)
-
 """
 Challenge 
 
+query the database on similarity and maximal marginal relevance.
+
+Try to answer what Edgar Wiebe Dijkstra did say about airports on his UK and US trip report.
+
+Add your assessment of the annoyance level experienced by EWD at airports with db.add_documents([Document(page_content="foo")]).
+
+Perform another query that finds out what was the most annoying thing on his trip.
 """

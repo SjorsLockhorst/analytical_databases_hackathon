@@ -6,6 +6,11 @@ Langchain can work with pgvector to store and query embeddings to add context du
 
 - https://python.langchain.com/docs/integrations/vectorstores/pgvector
 
+
+Note: for this assignment you need a OPENAI API key with some credits.
+
+You can add your key to the environment variables in the .env file in the root of this repository.
+Then rebuild your vscode devcontainer.
 """
 import os
 from langchain.docstore.document import Document
@@ -50,7 +55,7 @@ db = PGVector.from_documents(
 )
 
 
-# Using a VectorStore as a Retriever
+# Using a VectorStore as a Retriever of context during prompting
 retriever = db.as_retriever()
 
 from langchain.chat_models import ChatOpenAI
@@ -58,27 +63,12 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser
 from langchain.schema.runnable import RunnablePassthrough
 
-template = """Answer the question based only on the following context:
 
-{context}
-
-Question: {question}
 """
-prompt = ChatPromptTemplate.from_template(template)
-model = ChatOpenAI(model_name="gpt-3.5-turbo")
+Challenge
 
-
-def format_docs(docs):
-    return "\n\n".join([d.page_content for d in docs])
-
-
-chain = (
-    {"context": retriever | format_docs, "question": RunnablePassthrough()}
-    | prompt
-    | model
-    | StrOutputParser()
-)
-
-answer = chain.invoke("What did edgar say about take off from schiphol?")
-
-print(answer)
+create a prompt template that combines context from the retriever with a question.
+Initialize a ChatOpenAI model and use the prompt template to ask a question.
+Create a lang chain (sequence) that combines the retriever, prompt template and model.
+Invoke the chain with a question about EDW's trip.
+"""
