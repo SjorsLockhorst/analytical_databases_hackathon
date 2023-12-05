@@ -18,7 +18,8 @@ Rename the columns of the pandas dataframe to the following:
     - petal_width
     - species
 
-Query the Pandas dataframe with DuckDB and print the results and schema.
+Query the Pandas dataframe with DuckDB and compute the max of the sum of petal_width and petal_length per species.
+Print the results.
 
 ref:
 - https://duckdb.org/2021/05/14/sql-on-pandas.html
