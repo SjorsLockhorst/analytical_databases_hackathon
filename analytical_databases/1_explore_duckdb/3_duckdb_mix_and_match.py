@@ -1,5 +1,7 @@
 """
 Challenge 1:
+
+Copy your code from the previous sections to do the following:
 Read both the csv file and the delta table into a duckdb database table.
 Align the column names on the names provided:
     - sepal_length
@@ -8,13 +10,16 @@ Align the column names on the names provided:
     - petal_width
     - species
 
-Use a mix of the SQL and relational API to do the following:    
-- https://duckdb.org/docs/api/python/dbapi
-- https://duckdb.org/docs/api/python/relational_api
 
-Merge the two tables with DuckDB SQL to get the complete iris dataset.
 
-Query to find the species that has the highest average petal_width.
+Join the two tables with a Left join on sepal_length, petal_length and species with DuckDB SQL to get the complete iris dataset.
+Are the results of the join unique?
+- https://duckdb.org/docs/sql/query_syntax/from#joins
+
+
+Query the joined table to find the species that has the highest mean sum of sepal_width and petal_width.
+- groupby species: https://duckdb.org/docs/sql/query_syntax/groupby
+- sum and max: https://duckdb.org/docs/sql/aggregates
 
 """
 

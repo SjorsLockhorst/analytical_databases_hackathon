@@ -1,4 +1,6 @@
 """
+Please read the README.md in this directory first.
+
 Here we use an approach to creating embeddings with scikit-learn and the embetter library.
 
 https://koaning.github.io/embetter/applications/#lite-embeddings
@@ -43,6 +45,7 @@ Are cats more similar to cats than dogs are to dogs? and how similar are cats to
 Bonus Challenge:
 
 For this challenge we need to go on the cutting edge and install DuckDB straight from the source.
+For this we use `pip isntall --upgrade --pre duckdb`.
 - https://github.com/duckdb/duckdb
 
 The dev build has the array type of a fixed length. This is ideal to store numpy arrays of embeddings.
