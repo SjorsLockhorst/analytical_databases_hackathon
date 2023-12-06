@@ -27,7 +27,7 @@ print(X.shape)
 
 
 """
-Challenge:
+Challenge 1:
 Generate two numpy arrays with embeddings for the cats and dogs images respectively.
 
 Then calculate the average cosine similarity within and between the cats and dogs embeddings.
@@ -35,5 +35,34 @@ Then calculate the average cosine similarity within and between the cats and dog
 Are cats more similar to cats than dogs are to dogs? and how similar are cats to dogs?
 
 - https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html
+
+"""
+
+
+"""
+Bonus Challenge:
+
+For this challenge we need to go on the cutting edge and install DuckDB straight from the source.
+- https://github.com/duckdb/duckdb
+
+The dev build has the array type of a fixed length. This is ideal to store numpy arrays of embeddings.
+This is a very recent addition to DuckDB and it greatly speeds up multi-dimensional operations.
+The Array type makes DuckDB suitable as an in-memory vector database.
+
+- https://duckdb.org/docs/sql/data_types/array.html
+
+All functions that support lists also support arrays. In addition, arrays specific functions are available.
+Array specific functions are much more efficient as they can assume the fixed length of the array.
+You can see that specific vector comparison functions are available, such as cosine_similarity.
+
+- https://duckdb.org/docs/sql/data_types/array.html#functions
+
+Challenge 2:
+
+Create a table in DuckDB with two columns, image name and image embedding.
+    
+Then insert the cats and dogs embeddings into the table.
+    
+Then use the cosine_similarity function to find the most similar cat and dog images based on an example image from /workspace/data/images/requested_pets.
 
 """

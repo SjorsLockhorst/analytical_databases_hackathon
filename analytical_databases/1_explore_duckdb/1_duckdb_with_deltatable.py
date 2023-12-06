@@ -25,7 +25,7 @@ Rename the columns of the duckdb table to the following:
     - petal_length
     - species
 
-Query the DuckDB table and compute the max sepal_width per species.
+Query the DuckDB table with SQL and compute the max sepal_width per species.
 Print the results.
 
 
