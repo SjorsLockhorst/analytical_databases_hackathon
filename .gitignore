@@ -3,3 +3,5 @@
 .devcontainer/.env
 data/delta_df
 __pycache__
+.python-version
+*-env/
