@@ -8,6 +8,7 @@ https://koaning.github.io/embetter/applications/#lite-embeddings
 https://github.com/koaning/embetter
 
 """
+# %%
 import pandas as pd
 from sklearn.pipeline import make_pipeline
 
@@ -26,6 +27,8 @@ image_emb_pipeline = make_pipeline(
 dataf = pd.DataFrame({"img_path": ["/workspace/data/images/cats_vs_dogs/cat/0.jpg"]})
 X = image_emb_pipeline.fit_transform(dataf)
 print(X.shape)
+
+# %%
 
 
 """

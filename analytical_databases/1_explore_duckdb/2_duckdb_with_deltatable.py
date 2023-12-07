@@ -1,3 +1,4 @@
+# %%
 """
 read data from Delta Table with delta-rs and connect DuckDB then execute a query on it.
 
@@ -25,7 +26,6 @@ read the documentation for more information and support:
 - https://delta-io.github.io/delta-rs/usage/querying-delta-tables/
 
 """
-
 
 """
 DuckDB SQL is the main interface to DuckDB. It is a full SQL implementation that supports a wide variety of SQL features.
@@ -57,3 +57,25 @@ After renaming query the DuckDB table with SQL and compute the max sepal_width p
 Print the results as a dataframe.
 
 """
+
+# %%
+# Connect to DuckDB
+conn = duckdb.connect()
+
+# Load Delta Table and convert to Arrow dataset
+dt = DeltaTable("data/iris_dataset_part_1/")
+py_arrow_dataset = dt.to_pyarrow_dataset()
+
+# Create a temporary table in DuckDB from the Arrow dataset
+conn.register('iris_table', py_arrow_dataset)
+conn.execute("CREATE TABLE iris AS SELECT * FROM iris_table")
+
+# Renaming columns
+new_columns = ["sepal_length", "sepal_width", "petal_length", "species"]
+for old_name, new_name in zip(py_arrow_dataset.schema.names, new_columns):
+    conn.execute(f"ALTER TABLE iris RENAME COLUMN '{old_name}' TO '{new_name}'")
+
+# Example Query: Compute the max sepal_width per species
+result = conn.execute("SELECT species, MAX(sepal_width) FROM iris GROUP BY species").df()
+print(result)
+
