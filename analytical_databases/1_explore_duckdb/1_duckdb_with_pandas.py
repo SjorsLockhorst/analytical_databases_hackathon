@@ -5,7 +5,7 @@ The data is stored in a Pandas DataFrame based on a csv file in the "../data" di
 import duckdb
 import pandas as pd
 
-iris_2_pdf = pd.read_csv("/workspace/data/iris_dataset_part_2.csv")
+iris_2_pdf = pd.read_csv("data/iris_dataset_part_2.csv")
 
 """
 Please read the README.md in this directory first.
@@ -39,3 +39,11 @@ Print the results by moving it to a dataframe with duckdb.query("SQL query").to_
 ref:
 - https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rename.html
 """
+
+new_columns = ["sepal_length", "petal_length", "petal_width", "species"]
+mapper = {old_col: new_col for old_col,
+          new_col in zip(iris_2_pdf.columns, new_columns)}
+iris = iris_2_pdf.rename(columns=mapper)
+
+mean_petal_width = duckdb.query("select MEAN(petal_width), species from iris group by species").to_df()
+print(mean_petal_width)
