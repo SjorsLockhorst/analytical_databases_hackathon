@@ -11,6 +11,7 @@ https://github.com/koaning/embetter
 # %%
 import pandas as pd
 from sklearn.pipeline import make_pipeline
+from sklearn.metrics.pairwise import cosine_similarity
 
 from embetter.grab import ColumnGrabber
 from embetter.vision import ImageLoader, TimmEncoder
@@ -24,7 +25,7 @@ image_emb_pipeline = make_pipeline(
     TimmEncoder("mobilenetv2_120d"),
 )
 
-dataf = pd.DataFrame({"img_path": ["/workspace/data/images/cats_vs_dogs/cat/0.jpg"]})
+dataf = pd.DataFrame({"img_path": ["data/images/cats_vs_dogs/cat/0.jpg"]})
 X = image_emb_pipeline.fit_transform(dataf)
 print(X.shape)
 
@@ -42,6 +43,55 @@ Are cats more similar to cats than dogs are to dogs? and how similar are cats to
 - https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html
 
 """
+# %%
+import os
+
+BASE_PATH = "data/images/cats_vs_dogs"
+CAT_PATH = os.path.join(BASE_PATH, "cat")
+DOG_PATH = os.path.join(BASE_PATH, "dog")
+
+all_pics = []
+
+for dog_pic in os.listdir(DOG_PATH):
+    if dog_pic.endswith("jpg"):
+        dog_path = os.path.join(DOG_PATH, dog_pic)
+        all_pics.append(("dog", dog_path))
+
+for dog_pic in os.listdir(CAT_PATH):
+    if dog_pic.endswith("jpg"):
+        dog_path = os.path.join(CAT_PATH, dog_pic)
+        all_pics.append(("cat", dog_path))
+
+
+
+all_animals_df = pd.DataFrame(all_pics, columns=["species", "img_path"])
+
+# %%
+cat_idx = (all_animals_df.species == "cat").to_numpy()
+dog_idx = (all_animals_df.species == "dog").to_numpy()
+
+# %%
+embeds = image_emb_pipeline.fit_transform(all_animals_df)
+
+# %%
+dog_embeds = embeds[dog_idx]
+cat_embeds = embeds[cat_idx]
+
+# %% 
+within_dog_sims = cosine_similarity(dog_embeds)
+within_cat_sims = cosine_similarity(cat_embeds)
+dog_vs_cat_sim = cosine_similarity(dog_embeds, cat_embeds)
+
+# %%
+print("Dogs within")
+print(within_dog_sims.mean())
+print("Cats within")
+print(within_cat_sims.mean())
+print("Dogs vs cats")
+print(dog_vs_cat_sim.mean())
+
+# %%
+
 
 
 """

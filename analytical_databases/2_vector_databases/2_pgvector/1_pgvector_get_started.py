@@ -8,7 +8,6 @@ import numpy as np
 import psycopg
 from pgvector.psycopg import register_vector
 
-
 EMBEDDING_LENGTH = 3
 
 conn = psycopg.connect("postgresql://postgres:hack@localhost:5432", autocommit=True)
