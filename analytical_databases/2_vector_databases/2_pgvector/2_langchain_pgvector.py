@@ -7,6 +7,7 @@ Langchain can work with pgvector to store and query embeddings to add context.
 - https://python.langchain.com/docs/integrations/vectorstores/pgvector
 
 """
+# %%
 import os
 from langchain.docstore.document import Document
 from langchain.document_loaders import TextLoader
@@ -14,11 +15,15 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores.pgvector import PGVector
 from langchain.embeddings import HuggingFaceEmbeddings
 
+from dotenv import load_dotenv
+
+load_dotenv(".devcontainer/.env")
+
 
 CONNECTION_STRING = PGVector.connection_string_from_db_params(
     driver=os.environ.get("PGVECTOR_DRIVER", "psycopg"),
     host=os.environ.get("PGVECTOR_HOST", "localhost"),
-    port=int(os.environ.get("PGVECTOR_PORT", "5432")),
+    port=int(os.environ.get("PGVECTOR_PORT", "15432")),
     database=os.environ.get("PGVECTOR_DATABASE", "vector"),
     user=os.environ.get("POSTGRES_USER", "postgres"),
     password=os.environ.get("POSTGRES_PASSWORD", "postgres"),
@@ -26,7 +31,7 @@ CONNECTION_STRING = PGVector.connection_string_from_db_params(
 
 COLLECTION_NAME = "EWD_trip_report_US_UK"
 
-loader = TextLoader("/workspace/data/EWD_trip_report.txt")
+loader = TextLoader("data/EWD_trip_report.txt")
 documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
@@ -34,7 +39,7 @@ docs = text_splitter.split_documents(documents)
 # Specify the path to the pre-trained embedding model
 modelPath = "BAAI/bge-large-en-v1.5"
 # Create a dictionary with model configuration options, specifying to use the CPU for computations
-model_kwargs = {"device": "cpu"}
+model_kwargs = {"device": "cuda"}
 # Initialize an instance of HuggingFaceEmbeddings with the specified parameters
 # This can be any open-source huggingface embedding model
 embeddings = HuggingFaceEmbeddings(
@@ -51,6 +56,8 @@ db = PGVector.from_documents(
 )
 # How to add documents after initialization
 # db.add_documents([Document(page_content="foo")])
+
+# %%
 
 """
 Challenge 

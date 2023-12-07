@@ -6,7 +6,8 @@ from pgvector.django import VectorField
 class Embeddings(models.Model):
     id = models.IntegerField(blank=True, primary_key=True)
     # TODO: Determine the correct amount of dimensions
-    embedding = VectorField(dimensions=3)
+    source_img = models.CharField()
+    embedding = VectorField(dimensions=1280)
 
     class Meta:
         managed = False

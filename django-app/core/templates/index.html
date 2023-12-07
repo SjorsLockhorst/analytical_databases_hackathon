@@ -2,4 +2,11 @@
 
 {% block content %}
 <h1>Hello, Codebeez Hackathon!</h1>
+<!-- Upload Form -->
+<form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" accept=".jpg, .jpeg">
+    <button type="submit">Upload</button>
+</form>
+
 {% endblock content %}
